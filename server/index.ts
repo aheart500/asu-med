@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const app = express();
-
+const port = process.env.PORT || 3000;
 nextApp
   .prepare()
   .then(() => {
@@ -18,7 +18,7 @@ nextApp
       return handle(req, res);
     });
 
-    app.listen(3000, () => {
+    app.listen(port, () => {
       console.log("App ready on port 3000");
     });
   })
