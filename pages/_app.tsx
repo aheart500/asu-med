@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import { useEffect } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -7,7 +8,12 @@ function MyApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <CssBaseline />
+      <Component {...pageProps} />;
+    </>
+  );
 }
 
 export default MyApp;
