@@ -12,14 +12,13 @@ nextApp
   .prepare()
   .then(() => {
     app.use(express.json());
-    app.use("/api/downloads", express.static("dist/server/downloads"));
     app.use("/api", mainRouter);
     app.all("*", (req, res) => {
       return handle(req, res);
     });
 
     app.listen(port, () => {
-      console.log("App ready on port 3000");
+      console.log("App ready on port " + port);
     });
   })
   .catch((exception) => {

@@ -11,17 +11,17 @@ var dev = process.env.NODE_ENV !== "production";
 var nextApp = next_1.default({ dev: dev });
 var handle = nextApp.getRequestHandler();
 var app = express_1.default();
+var port = process.env.PORT || 3000;
 nextApp
     .prepare()
     .then(function () {
     app.use(express_1.default.json());
-    app.use("/api/downloads", express_1.default.static("dist/server/downloads"));
     app.use("/api", routes_1.default);
     app.all("*", function (req, res) {
         return handle(req, res);
     });
-    app.listen(3000, function () {
-        console.log("App ready on port 3000");
+    app.listen(port, function () {
+        console.log("App ready on port " + port);
     });
 })
     .catch(function (exception) {
