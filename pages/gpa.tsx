@@ -107,7 +107,7 @@ const GPA = () => {
       const communicationSkillsValue = convertGpaToValue(formik.values.communicationSkills);
       const calculatedGPA =
         (cnsValue * 225 + specialSensesValue * 50 + communicationSkillsValue * 25) / 300;
-      setGPA(Math.round((calculatedGPA + Number.EPSILON) * 100) / 100);
+      setGPA(Math.round((calculatedGPA + Number.EPSILON) * 1000) / 1000);
     } else {
       setGPA(null);
     }
