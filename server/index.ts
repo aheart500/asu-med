@@ -1,24 +1,32 @@
 import express from "express";
 import next from "next";
 import mainRouter from "./routes";
-
+import mongoose from "mongoose";
+import { MONGODB_URI, PORT } from "./utils/config";
 // Server Initialization
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const app = express();
-const port = process.env.PORT || 3000;
 nextApp
   .prepare()
   .then(() => {
+    mongoose
+      .connect(MONGODB_URI!, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      })
+      .then(() => console.log("MongoDB connected successfully"))
+      .catch((err) => console.log(err));
     app.use(express.json());
     app.use("/api", mainRouter);
     app.all("*", (req, res) => {
       return handle(req, res);
     });
 
-    app.listen(port, () => {
-      console.log("App ready on port " + port);
+    app.listen(PORT, () => {
+      console.log("App ready on port " + PORT);
     });
   })
   .catch((exception) => {

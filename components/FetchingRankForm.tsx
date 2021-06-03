@@ -1,8 +1,11 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 import { useFormik, FormikErrors } from "formik";
 import { FetchingFormValues } from "../types";
 import styles from "../styles/Home.module.css";
-
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import StudentContext from "../Contexts/Student/StudentContext";
 const validate = (values: FetchingFormValues) => {
   let errors: FormikErrors<FetchingFormValues> = {};
   if (!values.id) {
@@ -19,6 +22,9 @@ const validate = (values: FetchingFormValues) => {
 };
 
 const FetchingRankForm = () => {
+  const router = useRouter();
+  const { Save } = useContext(StudentContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const fetchingFormik = useFormik<FetchingFormValues>({
     initialValues: {
       id: "",
@@ -26,7 +32,25 @@ const FetchingRankForm = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      setErrorMessage("");
+      axios
+        .post("/api/rank", values)
+        .then(({ data }) => {
+          if (data.error) {
+            setErrorMessage(data.message);
+          } else {
+            Save({
+              rank: data.rank,
+              rankAmongGroup: data.rankAmongGroup,
+              empStudents: data.empStudents,
+              mainstreamStudents: data.mainstreamStudents,
+              total: data.total,
+              id: values.id,
+            });
+            router.push("/rank/result");
+          }
+        })
+        .catch((err) => console.log(err));
     },
   });
 
@@ -41,21 +65,25 @@ const FetchingRankForm = () => {
       <form onSubmit={fetchingFormik.handleSubmit} className={styles.form}>
         <TextField
           className={styles.txtField}
-          id="id"
+          id="id2"
           label="ID"
           type="text"
           variant="outlined"
           {...fetchingRestOfProps("id")}
         />
         <TextField
-          id="password"
+          id="password2"
           className={styles.txtField}
           label="Password"
           variant="outlined"
           type="password"
           {...fetchingRestOfProps("password")}
         />
-
+        {errorMessage ? (
+          <Typography variant="subtitle1" style={{ color: "red" }}>
+            {errorMessage}
+          </Typography>
+        ) : null}
         <Button className={styles.button} color="primary" type="submit" variant="contained">
           Fetch the rank
         </Button>
