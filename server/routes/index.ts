@@ -13,7 +13,7 @@ route.post("/rank", async (req, res) => {
     if (!user) {
       res.send({ error: true, message: "This ID isn't registered yet!" });
       return;
-    } else if (!user.matchesPassword(password)) {
+    } else if (!(await user.matchesPassword(password))) {
       res.send({ error: true, message: "Wrong password" });
       return;
     } else {

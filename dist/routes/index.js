@@ -54,15 +54,16 @@ route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 
                 }
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 3, , 4]);
+                _b.trys.push([1, 6, , 7]);
                 return [4 /*yield*/, Student_1.default.findOne({ id: id }).select("password")];
             case 2:
                 user = _b.sent();
-                if (!user) {
-                    res.send({ error: true, message: "This ID isn't registered yet!" });
-                    return [2 /*return*/];
-                }
-                else if (!user.matchesPassword(password)) {
+                if (!!user) return [3 /*break*/, 3];
+                res.send({ error: true, message: "This ID isn't registered yet!" });
+                return [2 /*return*/];
+            case 3: return [4 /*yield*/, user.matchesPassword(password)];
+            case 4:
+                if (!(_b.sent())) {
                     res.send({ error: true, message: "Wrong password" });
                     return [2 /*return*/];
                 }
@@ -90,12 +91,13 @@ route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 
                         });
                     });
                 }
-                return [3 /*break*/, 4];
-            case 3:
+                _b.label = 5;
+            case 5: return [3 /*break*/, 7];
+            case 6:
                 e_1 = _b.sent();
                 console.log(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); });
