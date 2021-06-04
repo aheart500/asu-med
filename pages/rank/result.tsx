@@ -11,7 +11,7 @@ const useStyle = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "25rem",
-    fontSize: "11rem",
+    fontSize: "10rem",
   },
 }));
 const ordinal_suffix_of = (i: number) => {
