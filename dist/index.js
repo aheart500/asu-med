@@ -13,12 +13,11 @@ var dev = process.env.NODE_ENV !== "production";
 var nextApp = next_1.default({ dev: dev });
 var handle = nextApp.getRequestHandler();
 var app = express_1.default();
-var dd = true;
 nextApp
     .prepare()
     .then(function () {
     mongoose_1.default
-        .connect(dd ? "mongodb://127.0.0.1:27017/asuRanking" : config_1.MONGODB_URI, {
+        .connect(config_1.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
