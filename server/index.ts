@@ -8,11 +8,12 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const app = express();
+const dd = true;
 nextApp
   .prepare()
   .then(() => {
     mongoose
-      .connect(MONGODB_URI!, {
+      .connect(dd ? "mongodb://127.0.0.1:27017/asuRanking" : MONGODB_URI!, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,

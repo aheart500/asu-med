@@ -9,7 +9,7 @@ route.post("/rank", async (req, res) => {
     return;
   }
   try {
-    const user = await Student.findOne({ id }).select("password");
+    const user = await Student.findOne({ id }).select("password grades");
     if (!user) {
       res.send({ error: true, message: "This ID isn't registered yet!" });
       return;
@@ -19,18 +19,21 @@ route.post("/rank", async (req, res) => {
     } else {
       Student.find({})
         .sort("-grades")
-        .select("id")
+        .select("id grades")
         .then((studentsGrades) => {
           let empStudents = 0;
           let mainstreamStudents = 0;
           studentsGrades.forEach((s) =>
             s.id.toString().length === 5 ? empStudents++ : mainstreamStudents++
           );
+          const studentsWithoutSmiliarGrades = studentsGrades.filter((s) =>
+            s.grades === user.grades ? (s.id === parseInt(id) ? true : false) : true
+          );
           res.send({
             error: false,
-            rank: studentsGrades.findIndex((s) => s.id === parseInt(id)) + 1,
+            rank: studentsWithoutSmiliarGrades.findIndex((s) => s.id === parseInt(id)) + 1,
             rankAmongGroup:
-              studentsGrades
+              studentsWithoutSmiliarGrades
                 .filter((s) =>
                   id.length === 5 ? s.id.toString().length === 5 : s.id.toString().length === 6
                 )
@@ -62,18 +65,21 @@ route.post("/student", async (req, res) => {
         .then(() => {
           Student.find({})
             .sort("-grades")
-            .select("id")
+            .select("id grades")
             .then((studentsGrades) => {
               let empStudents = 0;
               let mainstreamStudents = 0;
               studentsGrades.forEach((s) =>
                 s.id.toString().length === 5 ? empStudents++ : mainstreamStudents++
               );
+              const studentsWithoutSmiliarGrades = studentsGrades.filter((s) =>
+                s.grades === grades ? (s.id === parseInt(id) ? true : false) : true
+              );
               res.send({
                 error: false,
-                rank: studentsGrades.findIndex((s) => s.id === parseInt(id)) + 1,
+                rank: studentsWithoutSmiliarGrades.findIndex((s) => s.id === parseInt(id)) + 1,
                 rankAmongGroup:
-                  studentsGrades
+                  studentsWithoutSmiliarGrades
                     .filter((s) =>
                       id.length === 5 ? s.id.toString().length === 5 : s.id.toString().length === 6
                     )

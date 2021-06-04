@@ -43,7 +43,7 @@ var express_1 = require("express");
 var Student_1 = __importDefault(require("../models/Student"));
 var route = express_1.Router();
 route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, id, password, user, e_1;
+    var _a, id, password, user_1, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -55,13 +55,13 @@ route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 6, , 7]);
-                return [4 /*yield*/, Student_1.default.findOne({ id: id }).select("password")];
+                return [4 /*yield*/, Student_1.default.findOne({ id: id }).select("password grades")];
             case 2:
-                user = _b.sent();
-                if (!!user) return [3 /*break*/, 3];
+                user_1 = _b.sent();
+                if (!!user_1) return [3 /*break*/, 3];
                 res.send({ error: true, message: "This ID isn't registered yet!" });
                 return [2 /*return*/];
-            case 3: return [4 /*yield*/, user.matchesPassword(password)];
+            case 3: return [4 /*yield*/, user_1.matchesPassword(password)];
             case 4:
                 if (!(_b.sent())) {
                     res.send({ error: true, message: "Wrong password" });
@@ -70,17 +70,20 @@ route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 
                 else {
                     Student_1.default.find({})
                         .sort("-grades")
-                        .select("id")
+                        .select("id grades")
                         .then(function (studentsGrades) {
                         var empStudents = 0;
                         var mainstreamStudents = 0;
                         studentsGrades.forEach(function (s) {
                             return s.id.toString().length === 5 ? empStudents++ : mainstreamStudents++;
                         });
+                        var studentsWithoutSmiliarGrades = studentsGrades.filter(function (s) {
+                            return s.grades === user_1.grades ? (s.id === parseInt(id) ? true : false) : true;
+                        });
                         res.send({
                             error: false,
-                            rank: studentsGrades.findIndex(function (s) { return s.id === parseInt(id); }) + 1,
-                            rankAmongGroup: studentsGrades
+                            rank: studentsWithoutSmiliarGrades.findIndex(function (s) { return s.id === parseInt(id); }) + 1,
+                            rankAmongGroup: studentsWithoutSmiliarGrades
                                 .filter(function (s) {
                                 return id.length === 5 ? s.id.toString().length === 5 : s.id.toString().length === 6;
                             })
@@ -126,17 +129,20 @@ route.post("/student", function (req, res) { return __awaiter(void 0, void 0, vo
                         .then(function () {
                         Student_1.default.find({})
                             .sort("-grades")
-                            .select("id")
+                            .select("id grades")
                             .then(function (studentsGrades) {
                             var empStudents = 0;
                             var mainstreamStudents = 0;
                             studentsGrades.forEach(function (s) {
                                 return s.id.toString().length === 5 ? empStudents++ : mainstreamStudents++;
                             });
+                            var studentsWithoutSmiliarGrades = studentsGrades.filter(function (s) {
+                                return s.grades === grades ? (s.id === parseInt(id) ? true : false) : true;
+                            });
                             res.send({
                                 error: false,
-                                rank: studentsGrades.findIndex(function (s) { return s.id === parseInt(id); }) + 1,
-                                rankAmongGroup: studentsGrades
+                                rank: studentsWithoutSmiliarGrades.findIndex(function (s) { return s.id === parseInt(id); }) + 1,
+                                rankAmongGroup: studentsWithoutSmiliarGrades
                                     .filter(function (s) {
                                     return id.length === 5 ? s.id.toString().length === 5 : s.id.toString().length === 6;
                                 })
