@@ -92,6 +92,7 @@ const SavingDataForm = () => {
           label="Grades"
           variant="outlined"
           type="number"
+          InputProps={{ inputProps: { step: "any" } }}
           {...restOfProps("grades")}
         />
         <Typography variant="subtitle2">
