@@ -41,12 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var Student_1 = __importDefault(require("../models/Student"));
-var morgan_1 = __importDefault(require("morgan"));
 var route = express_1.Router();
-morgan_1.default.token("requestBody", function (req) {
-    return JSON.stringify(req.body);
-});
-route.use(morgan_1.default(":method :url :status :response-time ms :requestBody"));
 route.post("/rank", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, id, password, user_1, e_1;
     return __generator(this, function (_b) {

@@ -1,12 +1,8 @@
 import { Router } from "express";
 import Student from "../models/Student";
-import morgan from "morgan";
+
 const route = Router();
 
-morgan.token("requestBody", (req: any) => {
-  return JSON.stringify(req.body);
-});
-route.use(morgan(":method :url :status :response-time ms :requestBody"));
 route.post("/rank", async (req, res) => {
   const { id, password } = req.body;
   if (!id || !password) {
