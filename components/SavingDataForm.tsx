@@ -53,7 +53,7 @@ const SavingDataForm = () => {
               total: data.total,
               id: values.id,
             });
-            router.push("/rank/result");
+            router.push("/tools/rank/result");
           }
         })
         .catch((err) => console.log(err));
@@ -96,14 +96,20 @@ const SavingDataForm = () => {
           {...restOfProps("grades")}
         />
         <Typography variant="subtitle2">
-          Your grades out of 300 including CNS, Special Senses and Communication Skills
+          Your grades out of 300 including CNS, Special Senses and Communication
+          Skills
         </Typography>
         {errorMessage ? (
           <Typography variant="subtitle1" style={{ color: "red" }}>
             {errorMessage}
           </Typography>
         ) : null}
-        <Button className={styles.button} color="primary" type="submit" variant="contained">
+        <Button
+          className={styles.button}
+          color="primary"
+          type="submit"
+          variant="contained"
+        >
           Save & Fetch the rank
         </Button>
       </form>

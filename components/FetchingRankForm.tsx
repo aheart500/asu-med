@@ -47,7 +47,7 @@ const FetchingRankForm = () => {
               total: data.total,
               id: values.id,
             });
-            router.push("/rank/result");
+            router.push("/tools/rank/result");
           }
         })
         .catch((err) => console.log(err));
@@ -84,7 +84,12 @@ const FetchingRankForm = () => {
             {errorMessage}
           </Typography>
         ) : null}
-        <Button className={styles.button} color="primary" type="submit" variant="contained">
+        <Button
+          className={styles.button}
+          color="primary"
+          type="submit"
+          variant="contained"
+        >
           Fetch the rank
         </Button>
       </form>

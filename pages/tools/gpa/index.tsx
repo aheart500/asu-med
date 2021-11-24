@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import Container from "@material-ui/core/Container";
 import { useFormik, FormikErrors } from "formik";
-import { GPAFormValues } from "../../types";
+import { GPAFormValues } from "../../../types";
 import { TextField, Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
 const possibleCapitalAnswers = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"];

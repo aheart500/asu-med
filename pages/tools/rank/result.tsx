@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.css";
 import Container from "@material-ui/core/Container";
-import StudentContext from "../../Contexts/Student/StudentContext";
+import StudentContext from "../../../Contexts/Student/StudentContext";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Head from "next/head";
@@ -36,7 +36,7 @@ const rank = () => {
 
   useEffect(() => {
     if (!State) {
-      router.push("/rank");
+      router.push("/tools/rank");
     }
   }, []);
   if (!State) return <h1>Redirecting...</h1>;
