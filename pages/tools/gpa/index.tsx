@@ -1,11 +1,24 @@
 import Head from "next/head";
-import styles from "../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.css";
 import Container from "@material-ui/core/Container";
 import { useFormik, FormikErrors } from "formik";
 import { GPAFormValues } from "../../../types";
 import { TextField, Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
-const possibleCapitalAnswers = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"];
+const possibleCapitalAnswers = [
+  "A+",
+  "A",
+  "A-",
+  "B+",
+  "B",
+  "B-",
+  "C+",
+  "C",
+  "C-",
+  "D+",
+  "D",
+  "F",
+];
 const possibleAnswers = [
   ...possibleCapitalAnswers,
   ...possibleCapitalAnswers.map((a) => a.toLowerCase()),
@@ -104,9 +117,14 @@ const GPA = () => {
     if (Object.keys(errs).length === 0) {
       const cnsValue = convertGpaToValue(formik.values.cns);
       const specialSensesValue = convertGpaToValue(formik.values.specialSenses);
-      const communicationSkillsValue = convertGpaToValue(formik.values.communicationSkills);
+      const communicationSkillsValue = convertGpaToValue(
+        formik.values.communicationSkills
+      );
       const calculatedGPA =
-        (cnsValue * 225 + specialSensesValue * 50 + communicationSkillsValue * 25) / 300;
+        (cnsValue * 225 +
+          specialSensesValue * 50 +
+          communicationSkillsValue * 25) /
+        300;
       setGPA(Math.round((calculatedGPA + Number.EPSILON) * 1000) / 1000);
     } else {
       setGPA(null);
