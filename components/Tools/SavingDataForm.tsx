@@ -1,10 +1,10 @@
 import { TextField, Button, Typography } from "@material-ui/core";
 import { useFormik, FormikErrors } from "formik";
-import { SavingFormValues } from "../types";
-import styles from "../styles/Home.module.css";
+import { SavingFormValues } from "../../types";
+import styles from "../../styles/Home.module.css";
 import axios from "axios";
 import { useContext, useState } from "react";
-import StudentContext from "../Contexts/Student/StudentContext";
+import StudentContext from "../../Contexts/Student/StudentContext";
 import { useRouter } from "next/router";
 const validate = (values: SavingFormValues) => {
   let errors: FormikErrors<SavingFormValues> = {};

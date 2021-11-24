@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "../../../styles/Home.module.css";
 import Container from "@material-ui/core/Container";
-import SavingDataForm from "../../../components/SavingDataForm";
-import FetchingRankForm from "../../../components/FetchingRankForm";
+import SavingDataForm from "../../../components/Tools/SavingDataForm";
+import FetchingRankForm from "../../../components/Tools/FetchingRankForm";
 import clsx from "clsx";
 const Rank = () => {
   return (

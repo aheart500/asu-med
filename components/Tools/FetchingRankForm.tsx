@@ -1,11 +1,11 @@
 import { TextField, Button, Typography } from "@material-ui/core";
 import { useFormik, FormikErrors } from "formik";
-import { FetchingFormValues } from "../types";
-import styles from "../styles/Home.module.css";
+import { FetchingFormValues } from "../../types";
+import styles from "../../styles/Home.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import StudentContext from "../Contexts/Student/StudentContext";
+import StudentContext from "../../Contexts/Student/StudentContext";
 const validate = (values: FetchingFormValues) => {
   let errors: FormikErrors<FetchingFormValues> = {};
   if (!values.id) {
