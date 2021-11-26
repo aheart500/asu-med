@@ -21,7 +21,7 @@ const Schedular = ({
   const [date, setDate] = useState<stringOrDate>(new Date());
 
   const onSelectSlot = (slot: SlotInfo) => {
-    if (slot.action === "doubleClick") {
+    if (slot.action === "doubleClick" || slot.action === "select") {
       if (view === Views.MONTH || view === Views.WEEK) {
         setView(Views.DAY);
         setDate(slot.start);
@@ -50,6 +50,7 @@ const Schedular = ({
       onSelectSlot={onSelectSlot}
       onDoubleClickEvent={onSelectEvent}
       handleDragStart={() => null}
+      longPressThreshold={1}
     />
   );
 };
