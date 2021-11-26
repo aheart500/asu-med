@@ -40,7 +40,7 @@ const SavingDataForm = () => {
     onSubmit: (values) => {
       setErrorMessage("");
       axios
-        .post("/api/student", values)
+        .post("/api/tools/student", values)
         .then(({ data }) => {
           if (data.error) {
             setErrorMessage(data.message);

@@ -34,7 +34,7 @@ const FetchingRankForm = () => {
     onSubmit: (values) => {
       setErrorMessage("");
       axios
-        .post("/api/rank", values)
+        .post("/api/tools/rank", values)
         .then(({ data }) => {
           if (data.error) {
             setErrorMessage(data.message);

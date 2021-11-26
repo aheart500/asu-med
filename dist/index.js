@@ -21,6 +21,7 @@ nextApp
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false,
     })
         .then(function () { return console.log("MongoDB connected successfully"); })
         .catch(function (err) { return console.log(err); });

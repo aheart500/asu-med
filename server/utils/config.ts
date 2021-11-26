@@ -1,5 +1,5 @@
 import "dotenv/config";
-const dev = true;
+export const dev = process.env.DEV;
 export const PORT = process.env.PORT || 3000;
 export const MONGODB_URI = dev
   ? "mongodb://localhost:27017/asu-med"
