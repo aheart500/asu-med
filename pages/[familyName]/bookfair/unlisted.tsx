@@ -21,7 +21,7 @@ const bookfair = () => {
     GetBooks()
       .then((res) => setBooks(res))
       .catch((e) => console.log(e));
-  });
+  }, []);
   const bookActionCallBack = (_id: string) =>
     setBooks(books.filter((book) => book._id !== _id));
   return (
