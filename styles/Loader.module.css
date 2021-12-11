@@ -1,0 +1,22 @@
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader {
+  border-radius: 50%;
+  border: 6px solid lightgray;
+  border-top: 6px solid black;
+  animation: rotate 0.7s linear infinite;
+  width: 4rem;
+  height: 4rem;
+}

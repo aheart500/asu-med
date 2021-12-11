@@ -1,7 +1,10 @@
+import { BookGenres } from "../server/models/Book";
 import { APICall } from "./api";
 
-export const GetBooks = async () => {
-  const result = await APICall.get(`/families/bookfair`);
+export const GetBooks = async (genre?: BookGenres | "unlisted") => {
+  const result = await APICall.get(
+    `/families/bookfair/${genre ? genre.toLowerCase() : ""}`
+  );
   return result.data;
 };
 

@@ -11,26 +11,29 @@ import {
 } from "@material-ui/core";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import { useQueryClient, useQuery, useMutation } from "react-query";
-import BookRow from "../../../components/bookfair/BookRow";
-import { GetBooks, SaveBookOrBooks } from "../../../services/bookfair";
-
+import BookRow from "../../../../components/bookfair/BookRow";
+import BooksTabs from "../../../../components/bookfair/BooksTabs";
+import { GetBooks } from "../../../../services/bookfair";
+import Loader from "../../../../components/Loader";
 const bookfair = () => {
   const [books, setBooks] = useState<Array<any>>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     GetBooks()
       .then((res) => setBooks(res))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
   }, []);
-  const bookActionCallBack = (_id: string) => {
-    setBooks(books.filter((book) => book._id !== _id));
-  };
 
   return (
     <div>
       <Head>
         <title>Books List</title>
       </Head>
+      <BooksTabs />
+      <h3 style={{ textAlign: "right", margin: "0.5rem 1rem" }}>
+        عدد الكتب: {books.length}
+      </h3>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -45,15 +48,13 @@ const bookfair = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books
-              .filter((b) => b.genre === "")
-              .map((book) => (
-                <BookRow
-                  key={book._id}
-                  data={book}
-                  cb={() => bookActionCallBack(book._id)}
-                />
-              ))}
+            {loading ? (
+              <Loader />
+            ) : (
+              books.map((book) => (
+                <BookRow key={book._id} data={book} hide={false} />
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>

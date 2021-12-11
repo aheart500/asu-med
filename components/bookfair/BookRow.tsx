@@ -3,7 +3,6 @@ import {
   TableCell,
   TextField,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   makeStyles,
@@ -11,6 +10,7 @@ import {
 } from "@material-ui/core";
 import React, { useState, useRef } from "react";
 import { DeleteBook, UpdateBook } from "../../services/bookfair";
+import { bookGenres } from "./constants/bookfair";
 const useStyles = makeStyles(() => ({
   rtlInput: {
     direction: "rtl",
@@ -24,35 +24,38 @@ const useStyles = makeStyles(() => ({
   saveBtn: {
     margin: "1rem",
   },
+  actionsCell: {
+    "@media (max-width: 768px)": {
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      justifyContent: "center",
+      flexDirection: "column-reverse",
+    },
+  },
 }));
-const bookGenres = [
-  { arabic: "ديني", name: "Religious" },
-  { arabic: "ترفيه", name: "Entertainment" },
-  { arabic: "تعليمي", name: "Educational" },
-  { arabic: "أطفال", name: "Children" },
-  { arabic: "رواية", name: "Novels" },
-  { arabic: "قصة قصيرة", name: "short Stories" },
-];
 
-const BookRow = ({ data, cb }) => {
+const BookRow = ({ data, hide }) => {
   const classes = useStyles();
   const originalBook = useRef(data);
   const [book, setBook] = useState(data);
+  const [hidden, setHidden] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setBook({ ...book, [e.target.name]: e.target.value });
   const handleBookSave = () => {
     UpdateBook({ bookId: data._id, body: book })
-      .then(() => cb())
+      .then(() => hide && setHidden(true))
       .catch((e) => console.log(e));
   };
   const handleBookDelete = () => {
     DeleteBook({ bookId: data._id })
-      .then(() => cb())
+      .then(() => setHidden(true))
       .catch((e) => console.log(e));
   };
+  if (hidden) return null;
   return (
     <TableRow key={book._id}>
-      <TableCell width="25%" align="right">
+      <TableCell width="25%" align="right" className={classes.actionsCell}>
         <Button
           onClick={handleBookDelete}
           variant="contained"
@@ -109,4 +112,4 @@ const BookRow = ({ data, cb }) => {
   );
 };
 
-export default BookRow;
+export default React.memo(BookRow);

@@ -6,7 +6,9 @@ import { GetBooks, SaveBookOrBooks } from "../../../services/bookfair";
 const bookfair = () => {
   const queryClient = useQueryClient();
   const [textInput, setTextInput] = useState("");
-  const { data: books } = useQuery("books", GetBooks, { initialData: [] });
+  const { data: books } = useQuery("books", () => GetBooks(), {
+    initialData: [],
+  });
   const { mutate: save } = useMutation(SaveBookOrBooks, {
     onSuccess: () => queryClient.invalidateQueries("books"),
   });

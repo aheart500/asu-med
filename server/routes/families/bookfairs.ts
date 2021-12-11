@@ -1,11 +1,30 @@
 import { Router } from "express";
-import Book from "../../models/Book";
+import Book, { BookGenres } from "../../models/Book";
 
 const BookFairsRouter = Router();
 
 BookFairsRouter.get("/", async (_, res) => {
   try {
     const books = await Book.find({});
+    res.send(books);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+BookFairsRouter.get("/unlisted", async (_, res) => {
+  try {
+    const books = await Book.find({ genre: "" as any });
+    res.send(books);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+BookFairsRouter.get("/:genre", async (req, res) => {
+  try {
+    const books = await Book.find({
+      genre: { $regex: new RegExp(req.params.genre, "i") },
+    });
     res.send(books);
   } catch (e) {
     res.status(400).send(e);

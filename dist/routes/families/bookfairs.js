@@ -61,10 +61,50 @@ BookFairsRouter.get("/", function (_, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); });
+BookFairsRouter.get("/unlisted", function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var books, e_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, Book_1.default.find({ genre: "" })];
+            case 1:
+                books = _a.sent();
+                res.send(books);
+                return [3 /*break*/, 3];
+            case 2:
+                e_2 = _a.sent();
+                res.status(400).send(e_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+BookFairsRouter.get("/:genre", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var books, e_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, Book_1.default.find({
+                        genre: { $regex: new RegExp(req.params.genre, "i") },
+                    })];
+            case 1:
+                books = _a.sent();
+                res.send(books);
+                return [3 /*break*/, 3];
+            case 2:
+                e_3 = _a.sent();
+                res.status(400).send(e_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
 // For many books with titles only : Send req as {bulk: true, books: "book1, book2" }
 // For single book : Sent req as {bulk : false, book : BOOK}
 BookFairsRouter.post("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var isBulk, books, insertedBooks, book, e_2;
+    var isBulk, books, insertedBooks, book, e_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -89,8 +129,8 @@ BookFairsRouter.post("/", function (req, res) { return __awaiter(void 0, void 0,
                 _a.label = 5;
             case 5: return [3 /*break*/, 7];
             case 6:
-                e_2 = _a.sent();
-                res.status(400).send(e_2);
+                e_4 = _a.sent();
+                res.status(400).send(e_4);
                 return [3 /*break*/, 7];
             case 7: return [2 /*return*/];
         }
@@ -106,7 +146,7 @@ BookFairsRouter.patch("/:bookId", function (req, res) {
     });
 });
 BookFairsRouter.delete("/:bookId", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var e_3;
+    var e_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -117,8 +157,8 @@ BookFairsRouter.delete("/:bookId", function (req, res) { return __awaiter(void 0
                 res.send("Deleted");
                 return [3 /*break*/, 3];
             case 2:
-                e_3 = _a.sent();
-                res.status(400).send(e_3);
+                e_5 = _a.sent();
+                res.status(400).send(e_5);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
