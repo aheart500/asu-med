@@ -22,8 +22,10 @@ const bookfair = () => {
       .then((res) => setBooks(res))
       .catch((e) => console.log(e));
   }, []);
-  const bookActionCallBack = (_id: string) =>
+  const bookActionCallBack = (_id: string) => {
     setBooks(books.filter((book) => book._id !== _id));
+  };
+
   return (
     <div>
       <Head>
@@ -46,7 +48,11 @@ const bookfair = () => {
             {books
               .filter((b) => b.genre === "")
               .map((book) => (
-                <BookRow data={book} cb={() => bookActionCallBack(book._id)} />
+                <BookRow
+                  key={book._id}
+                  data={book}
+                  cb={() => bookActionCallBack(book._id)}
+                />
               ))}
           </TableBody>
         </Table>
