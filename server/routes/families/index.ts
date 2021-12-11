@@ -1,8 +1,11 @@
 import { Router } from "express";
-import FamilyModel from "../models/Family";
-import EventModel from "../models/Event";
+import FamilyModel from "../../models/Family";
+import EventModel from "../../models/Event";
+import BookFairsRouter from "./bookfairs";
 
 const FamiliesRouter = Router();
+
+FamiliesRouter.use("/bookfair/", BookFairsRouter);
 
 FamiliesRouter.get("/:familyname", (req, res) => {
   const findByFamilyName = req.params.familyname;

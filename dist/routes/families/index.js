@@ -15,9 +15,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var Family_1 = __importDefault(require("../models/Family"));
-var Event_1 = __importDefault(require("../models/Event"));
+var Family_1 = __importDefault(require("../../models/Family"));
+var Event_1 = __importDefault(require("../../models/Event"));
+var bookfairs_1 = __importDefault(require("./bookfairs"));
 var FamiliesRouter = express_1.Router();
+FamiliesRouter.use("/bookfair/", bookfairs_1.default);
 FamiliesRouter.get("/:familyname", function (req, res) {
     var findByFamilyName = req.params.familyname;
     Family_1.default.find(findByFamilyName ? { name: findByFamilyName } : {})

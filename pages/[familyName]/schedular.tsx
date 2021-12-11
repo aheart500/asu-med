@@ -16,6 +16,7 @@ import {
 import { GetServerSideProps } from "next";
 import { FacultyFamilies, FacultyFamily, FamilyEvent } from "../../types";
 import { capitalize } from "../../utils/helperFunctions";
+
 export type openDialogFunction = (
   type: "event" | "slot",
   data: SlotInfo | any
