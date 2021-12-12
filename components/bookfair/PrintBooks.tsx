@@ -13,7 +13,7 @@ class PrintTable extends Component {
     super(props);
   }
   render() {
-    const books = this.props.books;
+    const books = (this as any).props.books;
     if (books.length === 0) return null;
     const tableRows = [];
     for (let i = 0; i <= books.length; i = i + 2) {
@@ -21,13 +21,9 @@ class PrintTable extends Component {
     }
     return (
       <TableContainer component={Paper} className="printTable">
-        <Table
-          size="small"
-          aria-level="simple table"
-          style={{ direction: "rtl", fontSize: "0.8rem" }}
-        >
+        <Table size="small" style={{ direction: "rtl", fontSize: "0.8rem" }}>
           <TableHead>
-            <TableRow dense>
+            <TableRow>
               <TableCell align="right">اسم الكتاب</TableCell>
               <TableCell align="right">التصنيف</TableCell>
               <TableCell align="right">اسم الكتاب</TableCell>
