@@ -8,6 +8,7 @@ export const bookGenres = [
   { arabic: "تنيمة بشرية", name: "Self Development" },
   { arabic: "ثقافي", name: "Cultural" },
 ];
-
+export const getGenreInArabic = (genre: string) =>
+  bookGenres.find((g) => g.name === genre)?.arabic;
 export const isAGenre = (query: string) =>
   bookGenres.some((genre) => genre.name.toUpperCase() === query.toUpperCase());
