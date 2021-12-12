@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "react-query";
+import BooksTabs from "../../../components/bookfair/BooksTabs";
 import { bookGenres } from "../../../components/bookfair/constants/bookfair";
 import { GetBooks, SaveBookOrBooks } from "../../../services/bookfair";
 const useStyles = makeStyles(() => ({
@@ -16,6 +17,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "row-reverse",
     flexWrap: "wrap",
     alignItems: "center",
+    marginTop: "1rem",
   },
   rtlInput: {
     direction: "rtl",
@@ -56,6 +58,7 @@ const bookfair = () => {
   };
   return (
     <div>
+      <BooksTabs />
       <form onSubmit={handleFormSubmit} className={classes.root}>
         <TextField
           name="title"
