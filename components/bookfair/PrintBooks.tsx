@@ -34,10 +34,10 @@ class PrintTable extends Component {
             {tableRows.map((row, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell align="right">{row[0].title}</TableCell>
+                  <TableCell align="right">{row[0]?.title}</TableCell>
                   <TableCell align="right">
                     {" "}
-                    {getGenreInArabic(row[0].genre)}
+                    {getGenreInArabic(row[0]?.genre)}
                   </TableCell>
                   <TableCell align="right">{row[1]?.title}</TableCell>
                   <TableCell align="right">
