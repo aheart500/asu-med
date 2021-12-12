@@ -13,8 +13,17 @@ class PrintTable extends Component {
     super(props);
   }
   render() {
-    const books = (this as any).props.books;
+    const books = [...(this as any).props.books];
     if (books.length === 0) return null;
+    books.sort((a, b) => {
+      if (a.genre < b.genre) {
+        return 1;
+      }
+      if (a.genre > b.genre) {
+        return -1;
+      }
+      return 0;
+    });
     const tableRows = [];
     for (let i = 0; i <= books.length; i = i + 2) {
       tableRows.push([books[i], books[i + 1]]);

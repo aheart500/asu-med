@@ -1987,11 +1987,6 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-jspdf-autotable@^3.5.23:
-  version "3.5.23"
-  resolved "https://registry.yarnpkg.com/jspdf-autotable/-/jspdf-autotable-3.5.23.tgz#c46448ef93b51fc958feb6a2974257dde63c8f79"
-  integrity sha512-uIYxQsdKrDdbhygEFlbTVoaxawZMZXMasAOryQ1oMFTragcxLhhWIfc8peLCBXuB7fJ5SICtPZ2De7Pk7eS8SQ==
-
 jss-plugin-camel-case@^10.5.1:
   version "10.6.0"
   resolved "https://registry.yarnpkg.com/jss-plugin-camel-case/-/jss-plugin-camel-case-10.6.0.tgz#93d2cd704bf0c4af70cc40fb52d74b8a2554b170"
