@@ -51,7 +51,7 @@ const BooksTabs = () => {
       <Link href="/fekra/bookfair/bookslist/unlisted">
         <p className={classes.link}>غير مصنف</p>
       </Link>
-      <Link href="/fekra/bookfair/bookslist">
+      <Link href="/fekra/bookfair">
         <p className={classes.link}>كتاب جديد</p>
       </Link>
     </div>
