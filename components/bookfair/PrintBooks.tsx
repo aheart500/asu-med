@@ -35,8 +35,10 @@ class PrintTable extends Component {
             <TableRow>
               <TableCell align="right">اسم الكتاب</TableCell>
               <TableCell align="right">التصنيف</TableCell>
+              <TableCell align="right">ع</TableCell>
               <TableCell align="right">اسم الكتاب</TableCell>
               <TableCell align="right">التصنيف</TableCell>
+              <TableCell align="right">ع</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -45,14 +47,14 @@ class PrintTable extends Component {
                 <TableRow key={i}>
                   <TableCell align="right">{row[0]?.title}</TableCell>
                   <TableCell align="right">
-                    {" "}
                     {getGenreInArabic(row[0]?.genre)}
                   </TableCell>
+                  <TableCell align="left">{row[0]?.number}</TableCell>
                   <TableCell align="right">{row[1]?.title}</TableCell>
                   <TableCell align="right">
-                    {" "}
                     {getGenreInArabic(row[1]?.genre)}
                   </TableCell>
+                  <TableCell align="left">{row[1]?.number}</TableCell>
                 </TableRow>
               );
             })}

@@ -13,7 +13,10 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import BookRow from "../../../../components/bookfair/BookRow";
-import { isAGenre } from "../../../../components/bookfair/constants/bookfair";
+import {
+  BookFairTableColumns,
+  isAGenre,
+} from "../../../../components/bookfair/constants/bookfair";
 import BooksTabs from "../../../../components/bookfair/BooksTabs";
 import { GetBooks } from "../../../../services/bookfair";
 import Loader from "../../../../components/Loader";
@@ -44,13 +47,11 @@ const bookfair = ({ genre }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell width="25%"></TableCell>
-              <TableCell width="25%" align="right">
-                التصنيف
-              </TableCell>
-              <TableCell width="50%" align="right">
-                اسم الكتاب
-              </TableCell>
+              {BookFairTableColumns.map((col) => (
+                <TableCell key={col.name} width={col.width}>
+                  {col.name}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>

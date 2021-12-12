@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import React, { useState, useRef } from "react";
 import { DeleteBook, UpdateBook } from "../../services/bookfair";
-import { bookGenres } from "./constants/bookfair";
+import { BookFairTableColumns, bookGenres } from "./constants/bookfair";
 const useStyles = makeStyles(() => ({
   rtlInput: {
     direction: "rtl",
@@ -31,6 +31,11 @@ const useStyles = makeStyles(() => ({
       width: "100%",
       justifyContent: "center",
       flexDirection: "column-reverse",
+    },
+  },
+  numberInput: {
+    "& .MuiFilledInput-input": {
+      padding: "5px 2px",
     },
   },
 }));
@@ -55,7 +60,11 @@ const BookRow = ({ data, hide }) => {
   if (hidden) return null;
   return (
     <TableRow key={book._id}>
-      <TableCell width="25%" align="right" className={classes.actionsCell}>
+      <TableCell
+        width={BookFairTableColumns[0].width}
+        align="right"
+        className={classes.actionsCell}
+      >
         <Button
           onClick={handleBookDelete}
           variant="contained"
@@ -66,7 +75,8 @@ const BookRow = ({ data, hide }) => {
         <Button
           disabled={
             originalBook.current.title === book.title &&
-            originalBook.current.genre === book.genre
+            originalBook.current.genre === book.genre &&
+            originalBook.current.number === book.number
           }
           color="primary"
           onClick={handleBookSave}
@@ -76,7 +86,18 @@ const BookRow = ({ data, hide }) => {
           حفظ
         </Button>
       </TableCell>
-      <TableCell width="25%">
+      <TableCell width={BookFairTableColumns[1].width}>
+        <TextField
+          name="number"
+          value={book.number}
+          onChange={handleChange}
+          fullWidth
+          variant="filled"
+          type="number"
+          className={classes.numberInput}
+        />
+      </TableCell>
+      <TableCell width={BookFairTableColumns[2].width}>
         <FormControl fullWidth>
           <Select
             labelId="demo-simple-select-label"
@@ -98,7 +119,7 @@ const BookRow = ({ data, hide }) => {
           </Select>
         </FormControl>
       </TableCell>
-      <TableCell width="50%" align="right">
+      <TableCell width={BookFairTableColumns[3].width} align="right">
         <TextField
           name="title"
           className={classes.rtlInput}

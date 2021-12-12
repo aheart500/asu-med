@@ -13,11 +13,13 @@ export interface BookDocument extends Document {
   title: string;
   description: string;
   genre: BookGenres;
+  number: number;
 }
 const BookSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, default: "" },
   genre: { type: String, default: "" },
+  number: { type: Number, default: 0 },
 });
 
 const Book = model<BookDocument>("Book", BookSchema);

@@ -5,6 +5,7 @@ var BookSchema = new mongoose_1.Schema({
     title: { type: String, required: true },
     description: { type: String, default: "" },
     genre: { type: String, default: "" },
+    number: { type: Number, default: 0 },
 });
 var Book = mongoose_1.model("Book", BookSchema);
 exports.default = Book;

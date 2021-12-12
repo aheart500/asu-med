@@ -48,7 +48,7 @@ BookFairsRouter.get("/", function (_, res) { return __awaiter(void 0, void 0, vo
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, Book_1.default.find({}).select("title genre").lean()];
+                return [4 /*yield*/, Book_1.default.find({}).select("title genre number").lean()];
             case 1:
                 books = _a.sent();
                 res.send(books);
@@ -68,7 +68,7 @@ BookFairsRouter.get("/unlisted", function (_, res) { return __awaiter(void 0, vo
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, Book_1.default.find({ genre: "" })
-                        .select("title genre")
+                        .select("title genre number")
                         .lean()];
             case 1:
                 books = _a.sent();
@@ -91,7 +91,7 @@ BookFairsRouter.get("/:genre", function (req, res) { return __awaiter(void 0, vo
                 return [4 /*yield*/, Book_1.default.find({
                         genre: { $regex: new RegExp(req.params.genre, "i") },
                     })
-                        .select("title genre")
+                        .select("title genre number")
                         .lean()];
             case 1:
                 books = _a.sent();

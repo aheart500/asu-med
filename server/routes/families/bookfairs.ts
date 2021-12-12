@@ -5,7 +5,7 @@ const BookFairsRouter = Router();
 
 BookFairsRouter.get("/", async (_, res) => {
   try {
-    const books = await Book.find({}).select("title genre").lean();
+    const books = await Book.find({}).select("title genre number").lean();
     res.send(books);
   } catch (e) {
     res.status(400).send(e);
@@ -14,7 +14,7 @@ BookFairsRouter.get("/", async (_, res) => {
 BookFairsRouter.get("/unlisted", async (_, res) => {
   try {
     const books = await Book.find({ genre: "" as any })
-      .select("title genre")
+      .select("title genre number")
       .lean();
 
     res.send(books);
@@ -28,7 +28,7 @@ BookFairsRouter.get("/:genre", async (req, res) => {
     const books = await Book.find({
       genre: { $regex: new RegExp(req.params.genre, "i") },
     })
-      .select("title genre")
+      .select("title genre number")
       .lean();
 
     res.send(books);

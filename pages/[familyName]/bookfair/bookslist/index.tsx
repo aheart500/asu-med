@@ -18,6 +18,7 @@ import { GetBooks } from "../../../../services/bookfair";
 import Loader from "../../../../components/Loader";
 import ReactToPrint from "react-to-print";
 import PrintBooks from "../../../../components/bookfair/PrintBooks";
+import { BookFairTableColumns } from "../../../../components/bookfair/constants/bookfair";
 const useStyles = makeStyles(() => ({
   tableBar: {
     display: "flex",
@@ -78,13 +79,11 @@ const bookfair = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell width="25%"></TableCell>
-              <TableCell width="25%" align="right">
-                التصنيف
-              </TableCell>
-              <TableCell width="50%" align="right">
-                اسم الكتاب
-              </TableCell>
+              {BookFairTableColumns.map((col) => (
+                <TableCell key={col.name} width={col.width}>
+                  {col.name}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
