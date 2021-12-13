@@ -36,11 +36,8 @@ const BooksTabs = () => {
       <Link href="/fekra/bookfair/bookslist/Children">
         <p className={classes.link}>أطفال</p>
       </Link>
-      <Link href="/fekra/bookfair/bookslist/Novels">
-        <p className={classes.link}>رواية</p>
-      </Link>
-      <Link href="/fekra/bookfair/bookslist/short Stories">
-        <p className={classes.link}>قصة قصيرة</p>
+      <Link href="/fekra/bookfair/bookslist/Literature">
+        <p className={classes.link}>أدب</p>
       </Link>
       <Link href="/fekra/bookfair/bookslist/Self Development">
         <p className={classes.link}>تنيمة بشرية</p>

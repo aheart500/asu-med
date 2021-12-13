@@ -7,7 +7,8 @@ export type BookGenres =
   | "Religious"
   | "short Stories"
   | "Cultural"
-  | "Self Development";
+  | "Self Development"
+  | "Literature";
 
 export interface BookDocument extends Document {
   title: string;

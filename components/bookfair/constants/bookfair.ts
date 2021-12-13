@@ -3,8 +3,7 @@ export const bookGenres = [
   { arabic: "ترفيه", name: "Entertainment" },
   { arabic: "تعليمي", name: "Educational" },
   { arabic: "أطفال", name: "Children" },
-  { arabic: "رواية", name: "Novels" },
-  { arabic: "قصة قصيرة", name: "short Stories" },
+  { arabic: "أدب", name: "Literature" },
   { arabic: "تنيمة بشرية", name: "Self Development" },
   { arabic: "ثقافي", name: "Cultural" },
 ];

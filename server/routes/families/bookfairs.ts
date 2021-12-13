@@ -22,6 +22,18 @@ BookFairsRouter.get("/unlisted", async (_, res) => {
     res.status(400).send(e);
   }
 });
+BookFairsRouter.get("/custom", async (_, res) => {
+  try {
+    const books = await Book.updateMany(
+      { genre: { $in: ["short Stories", "Novels"] } },
+      { $set: { genre: "Literature" } },
+      { new: true }
+    );
+    res.send(books);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
 
 BookFairsRouter.get("/:genre", async (req, res) => {
   try {
