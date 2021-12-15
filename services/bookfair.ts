@@ -7,10 +7,14 @@ export const GetBooks = async (genre?: BookGenres | "unlisted") => {
   );
   return result.data;
 };
-
+interface Book {
+  title: string;
+  genre: string;
+  number: number;
+}
 interface ManyBooksSubmit {
   bulk: true;
-  books: String;
+  books: Book;
 }
 interface SingleBookSumbit {
   bulk: false;

@@ -136,10 +136,14 @@ BookFairsRouter.post("/", function (req, res) { return __awaiter(void 0, void 0,
             case 1:
                 _a.trys.push([1, 6, , 7]);
                 if (!isBulk) return [3 /*break*/, 3];
-                books = req.body.books
+                books = req.body.books.title
                     .split("\n")
                     .filter(function (book) { return book !== ""; })
-                    .map(function (book) { return ({ title: book.trim() }); });
+                    .map(function (book) { return ({
+                    title: book.trim(),
+                    genre: req.body.books.genre,
+                    number: req.body.books.number,
+                }); });
                 return [4 /*yield*/, Book_1.default.insertMany(books)];
             case 2:
                 insertedBooks = _a.sent();

@@ -55,10 +55,14 @@ BookFairsRouter.post("/", async (req, res) => {
   const isBulk = req.body.bulk === true;
   try {
     if (isBulk) {
-      const books = req.body.books
+      const books = req.body.books.title
         .split("\n")
         .filter((book: string) => book !== "")
-        .map((book: string) => ({ title: book.trim() }));
+        .map((book: string) => ({
+          title: book.trim(),
+          genre: req.body.books.genre,
+          number: req.body.books.number,
+        }));
       const insertedBooks = await Book.insertMany(books);
       res.send(insertedBooks);
     } else {
